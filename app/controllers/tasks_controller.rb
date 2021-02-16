@@ -3,30 +3,36 @@ class TasksController < ApplicationController
     @tasks = Task.all
   end
 
-  # Create task
-  def new
-    @new_task = Task.new
+  def show
   end
 
-  def show
-    @task = Tasks.find(params[:id])
+  def new
+    @task = Task.new
   end
 
   def create
-    @new_task = Task.new(task_params)
-    @new_task.save
-    redirect_to task_path(@new_task)
+    task = Task.new(task_params)
+    task.save
+    redirect_to tasks_path
   end
 
-  # Update task
   def edit
-    @task = Tasks.find(params[:id])
-    @task.update(restaurant_params)
+    @task.update(task_params)
     redirect_to task_path(@task)
   end
 
   def destroy
-    @task = Tasks.find(params[:id])
     @task.destroy
+    redirect_to tasks_path
+  end
+
+  private
+
+  def set_task
+    @task = Task.find(params[:id])
+  end
+
+  def task_params
+    params.require(:task).permit(:title, :details, :completed)
   end
 end
