@@ -1,2 +1,10 @@
-<h1>Tasks#update</h1>
-<p>Find me in app/views/tasks/update.html.erb</p>
+<h1>Update task</h1>
+
+<%= form_for(@task) do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  <%= f.label :details %>
+  <%= f.text_field :details %>
+  <%= f.submit %>
+<% end %>
+
